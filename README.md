@@ -20,7 +20,7 @@
 
 在Android工程中加入SDK所需的lib文件，以android-studio为例，如下图所示，加入亿连开放平台SDK：
 
-![加入SDK](docs/img/2.png)
+![加入SDK](docs/img/2.jpg)
 
 
 <h2 id="SDK接入步骤">三、SDK接入步骤</h2>
