@@ -41,9 +41,9 @@ wrcManager.init(context)
 3、 开始扫描亿连方控
 
 ```java
-wrcManager.startWrcScan(mCallback)
+wrcManager.startWrcScan(callback)
 ```
-第一个参数：mCallback为ScanCallback类型，定义如下：
+第一个参数：callback为ScanCallback类型，定义如下：
 
 ```java
 public interface ScanCallback {
