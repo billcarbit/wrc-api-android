@@ -53,7 +53,7 @@ public interface ScanCallback {
      * @param device 扫描到的亿连方控设备
      */
     public void onWrcScan(final WrcDevice device);
-    }
+}
 ```
 
 4、 连接亿连方控
