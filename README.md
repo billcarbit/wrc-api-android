@@ -38,7 +38,14 @@ wrcManager.init(context)
 ```
 **Tips：确保SDK初始化后才能执行后面的方法。**
 
-3、 开始扫描亿连方控
+3、 检查系统环境是否可用
+
+```java
+boolean isWrcSupport = wrcManager.isWrcSupport(Context context)
+```
+**Tips：检查Android版本需要4.0以上，蓝牙4.0。系统支持方控返回true，否则返回false**
+
+4、 开始扫描亿连方控
 
 ```java
 wrcManager.startWrcScan(callback)
@@ -48,15 +55,22 @@ wrcManager.startWrcScan(callback)
 ```java
 public interface ScanCallback {
     /**
-     *  当发现亿连方控
+     * 当发现亿连方控
      *
      * @param device 扫描到的亿连方控设备
      */
-    public void onWrcScan(final WrcDevice device);
+    void onWrcScan(final WrcDevice device);
+    
+    /**
+     * 扫描出错时回调
+     *
+     * @param errorCode 错误码
+     */
+    void onScanError(int errorCode);
 }
 ```
 
-4、 连接亿连方控
+5、 连接亿连方控
 
 ```java
 wrcManager.connectWrc(device, callback)
@@ -66,41 +80,46 @@ wrcManager.connectWrc(device, callback)
 public interface WrcCallback {
     /**
      * 亿连方控已连接状态时回调
-     *
      * @param device 已连接的亿连方控设备
      */
-    public void onConnected(final WrcDevice device);
+    void onConnected(final WrcDevice device);
 
     /**
      * 亿连方控断开时回调
      * @param device 已断开亿连方控设备
      */
-    public void onDisconnected(final WrcDevice device);
+    void onDisconnected(final WrcDevice device);
 
     /**
-     *
+     * 亿连方控按键回调
      * @param keyCode 详见：KEY_LEFT_UP, KEY_RIGHT_UP, KEY_LEFT_DOWN, KEY_RIGHT_DOWN, KEY_CENTRE
-     * @param action  详见：ACTION_SINGLE, ACTION_DOUBLE
+     * @param action  详见：ACTION_SINGLE_CLICK, ACTION_LONG_PRESSED
      */
-    public void onWrcKeyEvent(short keyCode,short action);
+    void onWrcKeyEvent(short keyCode,short action);
+    
+    /**
+     * 连接出错回调
+     * @param errorCode
+     */
+    void onWrcError(int errorCode);
 }
 ```
 
-5、 判断亿连方控是否连接
+6、 判断亿连方控是否连接
 
 ```java
 boolean isConnectWrc =  wrcManager.isConnectWrc();
 ```
 
 
-6、 断开亿驾方控连接
+7、 断开亿驾方控连接
 
 ```java
 wrcManager.disconnect();
 ```
 
 
-7、 固件升级(暂时不对持)
+8、 固件升级(暂时不对持)
 
 ```java
 wrcManager.startWrcOta(file, callback);
@@ -111,26 +130,23 @@ wrcManager.startWrcOta(file, callback);
 public interface OtaCallback{
     /**
      * 固件升级进度更新回调
-     *
      * @param progress   当前进度
      * @param total      总进度
      * @param sentNumber 固件大小(字节)
      */
-    public void onOtaProgressUpdate(final int progress, final int total, final int sentNumber);
+    void onOtaProgressUpdate(final int progress, final int total, final int sentNumber);
 
     /**
      * 固件升级出错回调
-     *
      * @param errorCode 错误码
      */
-    public void onOtaError(short errorCode);
+    void onOtaError(short errorCode);
 
     /**
      * 固件升级状态更新回调
-     *
      * @param state 详见: OTA_STATE_FAILED, OTA_STATE_COMPLETED, OTA_STATE_INPROGRESS
      */
-    public void onOtaStateUpdate(short state);
+    void onOtaStateUpdate(short state);
 }
 ```
 
