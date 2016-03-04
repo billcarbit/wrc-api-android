@@ -11,7 +11,7 @@
 ------------------
 <h2 id="简介">一、简介</h2>
 
-亿连方控SDK是一款为第三方应用提供与亿连方控连接的SDK，支持Android4.3及以上版本和蓝牙4.0以上的Android手机。
+亿连方控SDK是一款为第三方应用提供与亿连方控连接的SDK，仅支持Android4.3及以上版本和蓝牙4.0以上的Android车机。
 
  **Tips：同一时间只能有一个SDK与亿连方控连接。**
 
@@ -34,14 +34,16 @@ WrcManager wrcManager = WrcManager.getInstance();
 2、 SDK初始化
 
 ```java
-wrcManager.init(context)
+wrcManager.init(context, key)
 ```
+第一个参数context为上下文，第二个参数为亿连方控授权密钥。
+
 **Tips：确保SDK初始化后才能执行后面的方法。**
 
 3、 检查系统环境是否可用
 
 ```java
-boolean isWrcSupport = wrcManager.isWrcSupport(Context context)
+boolean isWrcSupport = wrcManager.isWrcSupport(context)
 ```
 **Tips：检查Android版本需要4.0以上，蓝牙4.0。系统支持方控返回true，否则返回false**
 
