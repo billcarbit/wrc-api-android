@@ -22,7 +22,12 @@
 
 ![加入SDK](docs/img/2.jpg)
 
-
+在AndroidManifest.xml文件中加入下面内容：
+```java
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+```
 <h2 id="SDK接入步骤">三、SDK接入步骤</h2>
 
 1、 获得SDK实例：
