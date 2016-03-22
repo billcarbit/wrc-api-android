@@ -24,7 +24,6 @@
 
 在AndroidManifest.xml文件中加入下面内容：
 ```java
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 ```
