@@ -76,7 +76,7 @@ public interface ScanCallback {
 }
 ```
 
-**Tips：从CarBitWrcSDK 1.0.17开始，可以通过device.getUuid()获得亿连方控设备的UUID，只有device.getUuid()与申请方控的UUID完全匹配才能进行下一步连接操作，例如：
+**Tips：从CarBitWrcSDK 1.0.17开始，可以通过device.getUuid()获得亿连方控设备的UUID，只有device.getUuid()与申请方控的UUID完全匹配才能进行下一步连接操作。例如：**
 
 ```java
     private static List<UUID> WRC_UUID = Arrays.asList(new UUID[]{
