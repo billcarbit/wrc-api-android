@@ -76,6 +76,44 @@ public interface ScanCallback {
 }
 ```
 
+从CarBitWrcSDK 1.0.17开始，可以通过device.getUuid()获得亿连方控设备的UUID，只有device.getUuid()与申请方控的UUID完全匹配才能进行下一步连接操作，例如：
+
+```
+    private static List<UUID> WRC_UUID = Arrays.asList(new UUID[]{
+            //下面可增加多个申请的UUID，xxxxxxxx为方控的UUID
+            UUID.fromString("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"),
+            UUID.fromString("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx")
+    });
+
+    private WrcManager.ScanCallback mWrcScanCallback = new WrcManager.ScanCallback() {
+        @Override
+        public void onWrcScan(final WrcDevice device) {
+            if (WRC_UUID.contains(device.getUuid())) {
+                mWrcManager.connectWrc(device, new WrcManager.WrcCallback() {
+                    @Override
+                    public void onConnected(WrcDevice wrcDevice) {
+
+                    }
+
+                    @Override
+                    public void onDisconnected(WrcDevice wrcDevice) {
+
+                    }
+
+                    @Override
+                    public void onWrcKeyEvent(byte b, byte b1) {
+
+                    }
+
+                    @Override
+                    public void onError(int i) {
+
+                    }
+                });
+            }
+        }
+```
+
 5、 连接亿连方控
 
 ```java
