@@ -38,9 +38,9 @@ WrcManager wrcManager = WrcManager.getInstance();
 2、 SDK初始化
 
 ```java
-wrcManager.init(context, key)
+wrcManager.init(context, key, pNumber)
 ```
-第一个参数context为上下文，第二个参数为亿连方控授权密钥。
+第一个参数context为上下文，第二个参数为亿连方控授权密钥, 第三个参数为项目编号。
 
 **Tips：确保SDK初始化后才能执行后面的方法。**
 
@@ -73,45 +73,32 @@ public interface ScanCallback {
      * @param errorCode 错误码
      */
     void onScanError(int errorCode);
+    
+    /**
+     * 亿连方控UUID过滤器
+     * @return
+     */
+    List<UUID> getUuidFilter();
 }
 ```
 
-**Tips：从CarBitWrcSDK 1.0.17开始，可以通过device.getUuid()获得亿连方控设备的UUID，只有device.getUuid()与申请方控的UUID完全匹配才能进行下一步连接操作。例如：**
+**Tips：从CarBitWrcSDK 1.0.18开始，可以通过getUuidFilter()过滤亿连方控设备的UUID，只有getUuidFilter()与申请方控的UUID完全匹配才能扫描到方控并回调到onWrcScan。例如：**
 
 ```java
-    private static List<UUID> WRC_UUID = Arrays.asList(new UUID[]{
-            //下面可增加多个申请的UUID，xxxxxxxx为方控的UUID
-            UUID.fromString("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"),
-            UUID.fromString("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx")
-    });
-
-    private WrcManager.ScanCallback mWrcScanCallback = new WrcManager.ScanCallback() {
-        @Override
-        public void onWrcScan(final WrcDevice device) {
-            if (WRC_UUID.contains(device.getUuid())) {
-                mWrcManager.connectWrc(device, new WrcManager.WrcCallback() {
-                    @Override
-                    public void onConnected(WrcDevice wrcDevice) {
-
-                    }
-
-                    @Override
-                    public void onDisconnected(WrcDevice wrcDevice) {
-
-                    }
-
-                    @Override
-                    public void onWrcKeyEvent(byte b, byte b1) {
-
-                    }
-
-                    @Override
-                    public void onError(int i) {
-
-                    }
-                });
-            }
+    @Override
+    public List<UUID> getUuidFilter() {
+        try {
+            return Arrays.asList(
+                    //请将下面两处xxxxxxxx修改方控对应的UUID，点击搜索设备后可以扫描到方控 确保UUID格式
+                    UUID.fromString("00001c00-d102-11e1-9b23-xxxxxxxxxxxx"),
+                    UUID.fromString("xxxxxxxx-0000-1000-8000-00805f9b34fb")
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(MainActivity.this, "UUID格式错误", Toast.LENGTH_SHORT).show();
         }
+        return null;
+    }
 ```
 
 5、 连接亿连方控
@@ -141,6 +128,12 @@ public interface WrcCallback {
      */
     void onWrcKeyEvent(short keyCode,short action);
     
+    /**
+     * 返回亿连方控版本号等信息
+     * @param device
+     */
+    void onCharacteristicRead(WrcDevice device);
+        
     /**
      * 连接出错回调
      * @param errorCode
