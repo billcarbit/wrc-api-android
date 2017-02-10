@@ -123,7 +123,7 @@ public interface WrcCallback {
 
     /**
      * 亿连方控按键回调
-     * @param keyCode 详见：KEY_LEFT_UP, KEY_RIGHT_UP, KEY_LEFT_DOWN, KEY_RIGHT_DOWN, KEY_CENTRE
+     * @param keyCode 详见：KEY_LEFT_UP, KEY_RIGHT_UP, KEY_LEFT_DOWN, KEY_RIGHT_DOWN, KEY_CENTRE, MINI_KEY_1, MINI_KEY_2, MINI_KEY_3
      * @param action  详见：ACTION_SINGLE_CLICK, ACTION_LONG_PRESSED
      */
     void onWrcKeyEvent(short keyCode,short action);
