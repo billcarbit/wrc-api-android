@@ -142,6 +142,7 @@ public interface WrcCallback {
     void onWrcError(int errorCode);
 }
 ```
+ **Tips：从CarBitWrcSDK 1.0.20开始支持方控Mini的三个键值，MINI_KEY_1, MINI_KEY_2, MINI_KEY_3**
 
 6、 判断亿连方控是否连接
 
