@@ -158,7 +158,7 @@ wrcManager.disconnect();
 ```
 
 
-8、 固件升级(暂时不对持)
+8、 固件升级(暂时不支持)
 
 ```java
 wrcManager.startWrcOta(file, callback);
